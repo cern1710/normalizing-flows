@@ -1,6 +1,8 @@
 import torch
 import matplotlib.pyplot as plt
 
+RANGE_LEN = 100
+
 # Helper functions
 def w1(z: torch.Tensor) -> torch.Tensor:
     """Sinusoidal oscillations"""
@@ -54,7 +56,7 @@ def plot_energy(values_list, titles, z1, z2):
     plt.show()
 
 if __name__ == "__main__":
-    z1 = z2 = torch.linspace(-4, 4, 100)
+    z1 = z2 = torch.linspace(-4, 4, RANGE_LEN)
     z1_grid, z2_grid = torch.meshgrid(z1, z2, indexing='ij')
     z = torch.stack((z1_grid, z2_grid), dim=-1)
     U1_values = torch.zeros_like(z1_grid)
@@ -62,8 +64,8 @@ if __name__ == "__main__":
     U3_values = torch.zeros_like(z1_grid)
     U4_values = torch.zeros_like(z1_grid)
 
-    for i in range(100):
-        for j in range(100):
+    for i in range(RANGE_LEN):
+        for j in range(RANGE_LEN):
             z_point = z[i, j]
             U1_values[i, j] = U1(z_point)
             U2_values[i, j] = U2(z_point)
