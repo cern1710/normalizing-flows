@@ -71,10 +71,10 @@ class RadialFlow(Flow):
                          (1 + self.beta * h + self.beta * h_prime * r))
 
 class NormalizingFlow(nn.Module):
-    def __init__(self, K: int, latent_dim: int):
+    def __init__(self, flow_len: int, latent_dim: int):
         super().__init__()
         self.transforms = nn.ModuleList(
-            [PlanarFlow(latent_dim) for _ in range(K)]
+            [PlanarFlow(latent_dim) for _ in range(flow_len)]
         )
 
     def forward(self, z: torch.Tensor):
